@@ -1,5 +1,5 @@
 clc;clear all
-I1=im2double(imread('/Users/h-xiao16/Desktop/Êı×ÖÍ¼Ïñ´¦Àí/×ÛºÏ×÷Òµ1/phone.bmp'));
+I1=im2double(imread(' '));
 block_size=16;
 kernel_size=8;
 repeat=block_size-kernel_size;
@@ -7,8 +7,8 @@ I1o=imresize(I1,[512+repeat 512+repeat],'bicubic');
 graph=zeros(size(I1o));
 figure(1),imshow(I1);
 num=(512)/kernel_size;
-I2=double(imread('/Users/h-xiao16/Desktop/Êı×ÖÍ¼Ïñ´¦Àí/×ÛºÏ×÷Òµ1/phone.bmp'));
-I3=double(imread('/Users/h-xiao16/Desktop/Êı×ÖÍ¼Ïñ´¦Àí/×ÛºÏ×÷Òµ1/latent.bmp'));
+I2=double(imread(''));
+I3=double(imread(' '));
  % h=fspecial('gaussian',3,3);
 I1=Normalization(I1,0.1,2,repeat);
 I1=histeq(I1o);
@@ -32,7 +32,7 @@ im_dft_abs=cell(num,num);
 im_dft_angle=cell(num,num);
 for i=1:num
     for j=1:num
-        im_block{i,j}=im_block0{i,j}-mean2(im_block0{i,j});%¼õÈ¥Ö±Á÷·ÖÁ¿
+        im_block{i,j}=im_block0{i,j}-mean2(im_block0{i,j});%å‡å»ç›´æµåˆ†é‡
         temp=im_block0{i,j};
         F1=fft2(im_block{i,j});
         V(i,j)=var(im_block{i,j}(:));
@@ -40,7 +40,7 @@ for i=1:num
         im_dft_angle{i,j}=angle(fftshift(fft2(im_block{i,j})));
         im_dft_abs{i,j}=(im_dft_abs{i,j}-min(im_dft_abs{i,j}(:)))/(max(im_dft_abs{i,j}(:))-min((im_dft_abs{i,j}(:))));
 %        im_abs_max=max(im_dft_abs{i,j});
- %       [m,centre]=max(im_abs_max);%centreÎª·ù¶ÈÆ×ÖĞĞÄµÄÎ»ÖÃ
+ %       [m,centre]=max(im_abs_max);%centreä¸ºå¹…åº¦è°±ä¸­å¿ƒçš„ä½ç½®
         [x,y] = sort(im_dft_abs{i,j}(:),'descend');
         [M,N]=size(im_block{i,j});
         im_dft_abs{i,j}(M/2+1,N/2+1) = 0;
@@ -52,14 +52,14 @@ for i=1:num
   %      
    %        end
    if(V(i,j)>0.01)
-             if((x(1)==x(2))&&(y(1)+y(2)==y(3)+y(4))&&(x(3)==x(4)))%ÊÇÖ¸ÎÆ
+             if((x(1)==x(2))&&(y(1)+y(2)==y(3)+y(4))&&(x(3)==x(4)))%æ˜¯æŒ‡çº¹
                  bg(i,j)=0;
       %   I4((8*(i-1)+1):8*i,(8*(j-1)+1):8*j)=I1((8*(i-1)+1):8*i,(8*(j-1)+1):8*j);
         
       %  temp=I4((8*(i-1)+1):8*i,(8*(j-1)+1):8*j);
         temp=im_block{i,j};
-        fs(i,j)=(sqrt((x1-x2)^2+(y1-y2)^2))*0.5*2*pi;%ÆµÂÊÍ¼
-        agl(i,j)=atan((y1-y2)/(x1-x2));%·½ÏòÍ¼
+        fs(i,j)=(sqrt((x1-x2)^2+(y1-y2)^2))*0.5*2*pi;%é¢‘ç‡å›¾
+        agl(i,j)=atan((y1-y2)/(x1-x2));%æ–¹å‘å›¾
           %  if(agl(i,j)>pi/2)
            %     agl(i,j)=pi+agl(i,j);
             %end
@@ -118,7 +118,7 @@ fs2=newfs2;
 
 for i=1:64
     for j=1:64
-        im_block{i,j}=im_block0{i,j}-mean2(im_block0{i,j});%¼õÈ¥Ö±Á÷·ÖÁ¿
+        im_block{i,j}=im_block0{i,j}-mean2(im_block0{i,j});%å‡å»ç›´æµåˆ†é‡
         temp=im_block0{i,j};
         F1=fft2(im_block{i,j});
         F0=fft2(im_block0{i,j});
@@ -127,7 +127,7 @@ for i=1:64
         im_dft_angle{i,j}=angle(fftshift(fft2(im_block{i,j})));
         im_dft_abs{i,j}=(im_dft_abs{i,j}-min(im_dft_abs{i,j}(:)))/(max(im_dft_abs{i,j}(:))-min((im_dft_abs{i,j}(:))));
 %        im_abs_max=max(im_dft_abs{i,j});
- %       [m,centre]=max(im_abs_max);%centreÎª·ù¶ÈÆ×ÖĞĞÄµÄÎ»ÖÃ
+ %       [m,centre]=max(im_abs_max);%centreä¸ºå¹…åº¦è°±ä¸­å¿ƒçš„ä½ç½®
         [x,y] = sort(im_dft_abs{i,j}(:),'descend');
         [M,N]=size(im_block{i,j});
         im_dft_abs{i,j}(M/2+1,N/2+1) = 0;
@@ -139,7 +139,7 @@ for i=1:64
   %      
    %        end
    if(V(i,j)>0.01)
-             if((x(1)==x(2))&&(y(1)+y(2)==y(3)+y(4))&&(x(3)==x(4)))%ÊÇÖ¸ÎÆ
+             if((x(1)==x(2))&&(y(1)+y(2)==y(3)+y(4))&&(x(3)==x(4)))%æ˜¯æŒ‡çº¹
                     agl(i,j)=0.5*atan2(aglsin2(i,j),aglcos2(i,j));
             [mag, phase] = imgaborfilt(im_block0{i,j},  max(fs2(i, j),2), (agl(i,j)+pi/2) * 180 / pi);
                 temp = mag.*cos(phase); 
@@ -164,33 +164,33 @@ for i=1:64
                 graph(1:block_size,1:block_size) = temp;
             else
                  graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + block_size))...
-                    =  graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + block_size)) + temp; %ÏÈÖ±½Ó¼ÓÉÏ
+                    =  graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + block_size)) + temp; %å…ˆç›´æ¥åŠ ä¸Š
                 graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + repeat))...
-                    = graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + repeat)) / 2; %ÔÙ°Ñ×ó²àÖØ¸´²¿·Ö³ı2
+                    = graph(1:block_size, ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + repeat)) / 2; %å†æŠŠå·¦ä¾§é‡å¤éƒ¨åˆ†é™¤2
             end
         else
             if(j ==1)
                  graph(((i - 1) * (block_size - repeat) + 1) : (i * (block_size - repeat) + repeat), 1:block_size)...
                      = graph(((i - 1) * (block_size - repeat) + 1) : (i * (block_size - repeat) + repeat), 1:block_size)...
-                     + temp;%ÏÈÖ±½Ó¼ÓÉÏ
+                     + temp;%å…ˆç›´æ¥åŠ ä¸Š
                  graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + repeat), 1:block_size)...
-                     =graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + repeat), 1:block_size) / 2;%ÉÏ·½
+                     =graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + repeat), 1:block_size) / 2;%ä¸Šæ–¹
             else
                 graph(((i - 1) * (block_size - repeat) + 1) : (i * (block_size - repeat) + repeat), ((j - 1) * (block_size - repeat) + 1) : (j * (block_size - repeat) + repeat))...
                      = graph(((i - 1) * (block_size - repeat) + 1) : (i * (block_size - repeat) + repeat), ((j - 1) * (block_size - repeat) + 1) : (j * (block_size - repeat) + repeat))...
-                     + temp;%ÏÈÖ±½Ó¼ÓÉÏ
+                     + temp;%å…ˆç›´æ¥åŠ ä¸Š
                  graph(((i - 1) * (block_size - repeat) +1) : ((i - 1) * (block_size - repeat) + repeat), ((j - 1) * (block_size - repeat) + repeat + 1) : ((j - 1) * (block_size - repeat) + block_size))...
                      = graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + repeat), ((j - 1) * (block_size - repeat) + repeat + 1) : ((j - 1) * (block_size - repeat) + block_size))...
-                     / 2;%ÉÏ·½ÖĞÓÒ
+                     / 2;%ä¸Šæ–¹ä¸­å³
                  graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + block_size), ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + repeat))...
                      = graph(((i - 1) * (block_size - repeat) + 1) : ((i - 1) * (block_size - repeat) + block_size), ((j - 1) * (block_size - repeat) + 1) : ((j - 1) * (block_size - repeat) + repeat))...
-                     /2;%×ó·½È«
+                     /2;%å·¦æ–¹å…¨
             end
         end
     end
         %subplot(num,num,i+num*(j-1)),imshow(im_dft_abs{i,j});
 end
-   %graph = imfilter(graph, fspecial('gaussian',ceil(block_size/2),1));
+   graph = imfilter(graph, fspecial('gaussian',ceil(block_size/2),2));
 figure(10),imshow(graph);
 
 %{
